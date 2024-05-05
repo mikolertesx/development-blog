@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    // Enables tailwindcss in globals.css
+    "*.css": "tailwindcss"
+  }
+}
