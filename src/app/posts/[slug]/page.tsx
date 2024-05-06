@@ -1,22 +1,25 @@
-import { getPostData } from "@/lib/posts";
-
-export async function getServerSideProps(context: unknown) {
-  return {};
-}
+import { processPostData } from "@/lib/posts";
+import { prismaClient } from "@/lib/prismaClient";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const id = params.slug;
-  console.log(id);
-  const foundData = await getPostData(id);
+  const foundArticle = await prismaClient.post.findFirst({
+    where: {
+      id,
+    },
+  });
 
-  if (foundData === null) {
-    return <p>Article not found</p>;
+  if (foundArticle === null) {
+    return <h1>Article not found</h1>;
   }
+
+  const content = await processPostData(foundArticle.content);
+  console.log(foundArticle, content);
 
   return (
     <div>
-      <h1>{foundData?.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: foundData.content }}></div>
+      <h1>{foundArticle.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: content }}></div>
     </div>
   );
 }

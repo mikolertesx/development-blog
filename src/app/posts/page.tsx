@@ -1,13 +1,14 @@
 import Link from "next/link";
-import { getSortedPostsData } from "@/lib/posts";
+import { prismaClient } from "@/lib/prismaClient";
 
 export default async function Page() {
-  const data = await getSortedPostsData();
+  const posts = await prismaClient.post.findMany();
+  console.log(posts);
 
   return (
     <div>
       <ul>
-        {data.map((post) => (
+        {posts.map((post) => (
           <li key={post.id}>
             <Link key={post.id} href={`/posts/${post.id}`}>
               {post.title}

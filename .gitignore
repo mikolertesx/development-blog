@@ -37,4 +37,4 @@ next-env.d.ts
 
 # prevents temporal files from being added
 /.temp
-
+.env

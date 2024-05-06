@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Generate prisma DB",
+      "type": "shell",
+      "command": "npx prisma generate",
+      "runOptions": {
+        // Makes sure you have the latest types by default.
+        "runOn": "folderOpen"
+      }
+    },
+  ]
+}
